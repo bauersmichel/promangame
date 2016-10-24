@@ -1,0 +1,28 @@
+h1 {
+	font-weight:bold; /* fett */
+	text-align:center; /* zentriert */
+	font-size: 60px; /* Textgröße 20px */
+	font-family:Verdana;
+	margin-top: 15px; /* 15px von oben */
+	margin-bottom: 15px; /* 15px von unten */
+	color: #00998A;
+	background: #FFF2CD;
+	width: 3179px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+img {
+	margin: 20px;
+}
+
+#copyright {
+	position: fixed; 
+	top: 100px;
+	left: 10px;
+	width: 200px;
+	height: 50px;
+	z-index:3;
+	background-color:#ffa;
+	font-family:Verdana;
+}
