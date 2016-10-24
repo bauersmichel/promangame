@@ -5,6 +5,8 @@ TODO
 
 0. Einarbeiten in Git https://rogerdudler.github.io/git-guide/index.de.html oder https://try.github.io
 
+0.1. Responsive ImageMap http://maddesigns.de/responsive-imagemap-2194.html
+
 1. Stellen Sie zwei Spielfiguren (Rot/Blau) auf dem Spielfeld. Die Darstellung und Implementierung (Methoden) soll dem Objektansatz von JavaScript folgen (sh. Vortrag Flath). Spielfiguren sollen ihren Zustand kennen (Position, aktuelles Feld auf Plan, Gabelung, Teamname, …).
 2. Erstellen Sie ein Objekt, dass einen Wegpunkt darstellt. Wegpunkte sind entweder benannt ( ) oder unbenannt (). Speichern Sie zu jedem Wegpunkt Typ, Koordinaten, Farbe, Name, Vorgänger, Nachfolger Wegpunkt und Weg, auf dem er sich befindet. Jeder Wegpunkt soll eine eindeutige Identifizierung haben).
 3. Schreiben Sie eine Methode figurPositionieren, um eine Spielfigur an eine bestimmte Stelle des Spielfeldes zu positionieren (mittels x, y Koordinaten).
