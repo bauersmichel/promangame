@@ -1,0 +1,18 @@
+ABGABE:
+
+eine ZIP Hochladen jeder.
+
+Enthalten
+Ordner: Praesentation (Inhalt: Präsi file(s))
+Ordner: Sourcecode + Doku (evtl. einfach in Readme HTML)
+
+
+Inhalt Doku:
+Format: entweder Word oder HTML5 Readme
+Einleitend: Was leistet die Software
+Anforderungen
+Wer war dabei in der Gruppe?
+Architekturbeschreibung: Softwaremuster etc? 
+Anforderungen Erfüllt?
+Liste mit allen verwendeten Dateien
+
