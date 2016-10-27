@@ -5,9 +5,25 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="gipfelsturm.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="scripts/players.js"></script>
+    <script src="scripts/spielFigur.js"></script>
   </head>
-  <body>
-   
+  <body style="background-color:#333333;">
+    <div id="spielfeld">
+    </div>
+    <script>
+         var GipfelSturm = GipfelSturm || {};
+
+         $(document).ready( function (){
+           spieler1 = new GipfelSturm.SpielFigur();
+           spieler2 = new GipfelSturm.SpielFigur("0px", "50px");
+           spieler3 = new GipfelSturm.SpielFigur("0px", "100px");
+           spieler4 = new GipfelSturm.SpielFigur("0px", "150px");
+         });
+
+
+
+
+    </script>
+
   </body>
 </html>
