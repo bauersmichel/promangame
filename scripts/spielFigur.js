@@ -12,6 +12,8 @@ GipfelSturm.SpielFigur = function SpielFigur(pos_x = 0, pos_y = 0){
   this.farbe = SPIELER_FARBEN[spieler_zahl-1];
   this.pos_x = pos_x;
   this.pos_y = pos_y;
+  this.wegpunkt = null;
+  this.wegpunkt_ist_gabelung = null;
 
   var c = kreisZeichnen(this.pos_x, this.pos_y, SPIELER_GROESSE, this.farbe)
   c.id = this.spieler
@@ -20,6 +22,13 @@ GipfelSturm.SpielFigur = function SpielFigur(pos_x = 0, pos_y = 0){
 }
 
 GipfelSturm.SpielFigur.prototype = {
+   figurWegpunktPositionieren:function (wegpunkt) {
+     this.wegpunkt_ist_gabelung = false;
+     if (wegpunkt.nachfolger.length > 1) // => Gabelung
+         this.wegpunkt_ist_gabelung = true;
+     this.wegpunkt = wegpunkt;
+     this.figurPositionierenAnimiert(wegpunkt.pos_x, wegpunkt.pos_y);
+   },
    figurPositionieren:function (pos_x, pos_y) {
       console.log(`${this.spieler} => Positon ${pos_x} ${pos_y}`)
       this.pos_x = pos_x;

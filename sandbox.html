@@ -17,28 +17,38 @@
          var GipfelSturm = GipfelSturm || {};
 
          $(document).ready( function (){
-           spieler1 = new GipfelSturm.SpielFigur(0, 50);
-           spieler2 = new GipfelSturm.SpielFigur(50, 50);
-           spieler3 = new GipfelSturm.SpielFigur(100, 50);
-           spieler4 = new GipfelSturm.SpielFigur(150, 50);
-           spieler5 = new GipfelSturm.SpielFigur(100, 100);
-           spieler6 = new GipfelSturm.SpielFigur(200, 200);
-           spieler1.figurPositionierenAnimiert(300, 300);
-           spieler2.figurPositionierenAnimiert(300, 300);
-           spieler3.figurPositionierenAnimiert(300, 300);
-           spieler4.figurPositionierenAnimiert(300, 300);
-           spieler5.figurPositionierenAnimiert(300, 300);
-           spieler6.figurPositionierenAnimiert(300, 300);
+           spieler1 = new GipfelSturm.SpielFigur(0,0);
+           spieler2 = new GipfelSturm.SpielFigur();
+           spieler3 = new GipfelSturm.SpielFigur();
+           spieler4 = new GipfelSturm.SpielFigur();
+           spieler5 = new GipfelSturm.SpielFigur();
+           spieler6 = new GipfelSturm.SpielFigur();
 
-           wegpunkt1 = new GipfelSturm.WegPunktBenannt("Start", 300,300, "Weg1");
-           wegpunkt2 = new GipfelSturm.WegPunkt(200,200, "Weg1");
+           wegpunkt1 = new GipfelSturm.WegPunktBenannt("Start", 100, 100, "Weg1");
+           wegpunkt2 = new GipfelSturm.WegPunkt(200,100, "Weg1");
+           wegpunkt3 = new GipfelSturm.WegPunktBenannt("Gabelung", 300,150, "Weg1");
+           wegpunkt4 = new GipfelSturm.WegPunkt(400,175, "Weg2");
+           wegpunkt5 = new GipfelSturm.WegPunkt(375,275, "Weg3");
+           wegpunkt1.addNachfolger(wegpunkt2);
+           wegpunkt2.addNachfolger(wegpunkt3);
+           wegpunkt3.addNachfolger(wegpunkt4);
+           wegpunkt3.addNachfolger(wegpunkt5);
+
+           spieler1.figurPositionierenAnimiert(100, 100);
+           spieler2.figurWegpunktPositionieren(wegpunkt1);
+           spieler3.figurWegpunktPositionieren(wegpunkt1);
+           spieler4.figurWegpunktPositionieren(wegpunkt1);
+           spieler5.figurWegpunktPositionieren(wegpunkt1);
+           spieler6.figurWegpunktPositionieren(wegpunkt1);
+
+
          });
 
     </script>
-    
-    <button onClick="spieler1.figurPositionieren(200, 200);"> Spieler1 </button>
-    <button onClick="spieler2.figurPositionierenAnimiert(200, 200);"> Spieler2 </button>
-    <button onClick="spieler3.figurPositionierenAnimiert(200, 200);"> Spieler3 </button>
-    <button onClick="spieler4.figurPositionierenAnimiert(200, 200);"> Spieler4 </button>
+
+    <button onClick="spieler1.figurPositionieren(200, 100);"> Spieler1 nach WP 1 </button>
+    <button onClick="spieler2.figurPositionierenAnimiert(200, 100);"> Spieler2 nach WP 1   </button>
+    <button onClick="spieler3.figurWegpunktPositionieren(wegpunkt2);"> Spieler3 nach WP 1 </button>
+    <button onClick="spieler4.figurWegpunktPositionieren(spieler4.wegpunkt.nachfolger[0]);"> Spieler4 weiterziehen </button>
   </body>
 </html>
