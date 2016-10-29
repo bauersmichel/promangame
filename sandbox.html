@@ -4,8 +4,11 @@
     <title>ProManGame</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="gipfelsturm.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="scripts/paper-core.min.js"></script>
+    <script src="scripts/gipfelsturmLib.js"></script>
     <script src="scripts/spielFigur.js"></script>
+    <script src="scripts/wegPunkt.js"></script>
   </head>
   <body style="background-color:#333333;">
     <div id="spielfeld">
@@ -14,16 +17,28 @@
          var GipfelSturm = GipfelSturm || {};
 
          $(document).ready( function (){
-           spieler1 = new GipfelSturm.SpielFigur();
-           spieler2 = new GipfelSturm.SpielFigur("0px", "50px");
-           spieler3 = new GipfelSturm.SpielFigur("0px", "100px");
-           spieler4 = new GipfelSturm.SpielFigur("0px", "150px");
+           spieler1 = new GipfelSturm.SpielFigur(0, 50);
+           spieler2 = new GipfelSturm.SpielFigur(50, 50);
+           spieler3 = new GipfelSturm.SpielFigur(100, 50);
+           spieler4 = new GipfelSturm.SpielFigur(150, 50);
+           spieler5 = new GipfelSturm.SpielFigur(100, 100);
+           spieler6 = new GipfelSturm.SpielFigur(200, 200);
+           spieler1.figurPositionierenAnimiert(300, 300);
+           spieler2.figurPositionierenAnimiert(300, 300);
+           spieler3.figurPositionierenAnimiert(300, 300);
+           spieler4.figurPositionierenAnimiert(300, 300);
+           spieler5.figurPositionierenAnimiert(300, 300);
+           spieler6.figurPositionierenAnimiert(300, 300);
+
+           wegpunkt1 = new GipfelSturm.WegPunktBenannt("Start", 300,300, "Weg1");
+           wegpunkt2 = new GipfelSturm.WegPunkt(200,200, "Weg1");
          });
 
-
-
-
     </script>
-
+    
+    <button onClick="spieler1.figurPositionieren(200, 200);"> Spieler1 </button>
+    <button onClick="spieler2.figurPositionierenAnimiert(200, 200);"> Spieler2 </button>
+    <button onClick="spieler3.figurPositionierenAnimiert(200, 200);"> Spieler3 </button>
+    <button onClick="spieler4.figurPositionierenAnimiert(200, 200);"> Spieler4 </button>
   </body>
 </html>
