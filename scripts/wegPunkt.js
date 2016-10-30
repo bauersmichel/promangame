@@ -4,10 +4,10 @@ var alle_wegpunkte = {}
 var DEBUG = true;  // Falls aktiviert werden Wegpunkte als Kreise gezeichnet, falls nicht werden nur divs erstellt
 var WEGPUNKT_GROSS = 60;
 var WEGPUNKT_KLEIN = 30;
-var wegpunkt_uuid = 0; // globaler Zähler für Wegpunkte => eindeutige ID für die einzelnen Objekte
+var wegpunkt_uid = 0; // globaler Zähler für Wegpunkte => eindeutige ID für die einzelnen Objekte
 
 GipfelSturm.WegPunkt = function WegPunkt(pos_x, pos_y, weg, durchmesser=WEGPUNKT_KLEIN, farbe="#ffffff") {
-  this.uuid = "wegpunkt" + ++wegpunkt_uuid;  // Objektzähler bei instanziierung inkrementieren
+  this.uid = "wegpunkt" + ++wegpunkt_uid;  // Objektzähler bei instanziierung inkrementieren
   this.name = "";
   this.pos_x = pos_x;
   this.pos_y = pos_y;
@@ -23,13 +23,13 @@ GipfelSturm.WegPunkt = function WegPunkt(pos_x, pos_y, weg, durchmesser=WEGPUNKT
     offset = ((SPIELER_GROESSE - durchmesser)/2)  - 1
     wp = divHelfer(this.pos_x + offset , this.pos_y + offset, durchmesser, durchmesser);
   }
-  wp.id = this.uuid;
+  wp.id = this.uid;
   wp.style.zIndex=-1;
   $(wp).on('click', function () {
-                                alert(alle_wegpunkte[this.id].uuid);
+                                alert(alle_wegpunkte[this.id].uid);
                                });
   $('#spielfeld').append(wp);
-  alle_wegpunkte[this.uuid] = this
+  alle_wegpunkte[this.uid] = this
 
 }
 

@@ -1,23 +1,25 @@
-function kreisZeichnen (x, y, durchmesser, farbe) {
+function canvasErstellen(x, y, breite, hoehe) {
   // canvas vorbereiten
   var c = document.createElement('canvas');
-
-  c.width = durchmesser;
-  c.height = durchmesser;
+  c.width = breite;
+  c.height = hoehe;
   c.style.top = y + "px";
   c.style.left = x + "px";
   c.style.position = "absolute";
+  return c;
+}
 
+function kreisZeichnen (x, y, durchmesser, farbe) {
+  k = canvasErstellen(x, y, durchmesser, durchmesser);
   // Kreis auf canvas zeichenen (mit Paper.js-Library)
-  paper.setup(c);
+  paper.setup(k);
   with (paper) {
       r = durchmesser / 2;
       var circle = Path.Circle(new Point(r, r), r);
       circle.fillColor = farbe;
       view.draw();
   }
-
-  return c;
+  return k;
 }
 
 function divHelfer(x, y, hoehe, breite, rand=0) {

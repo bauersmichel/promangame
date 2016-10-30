@@ -9,6 +9,7 @@
     <script src="scripts/gipfelsturmLib.js"></script>
     <script src="scripts/spielFigur.js"></script>
     <script src="scripts/wegPunkt.js"></script>
+    <script src="scripts/wuerfel.js"></script>
   </head>
   <body style="background-color:#333333;">
     <div id="spielfeld">
@@ -23,6 +24,8 @@
            spieler4 = new GipfelSturm.SpielFigur();
            spieler5 = new GipfelSturm.SpielFigur();
            spieler6 = new GipfelSturm.SpielFigur();
+
+           wuerfel1 = new GipfelSturm.Wuerfel(6, 400, 50, "#ffffff", true);
 
            wegpunkt1 = new GipfelSturm.WegPunktBenannt("Start", 100, 100, "Weg1");
            wegpunkt2 = new GipfelSturm.WegPunkt(200,100, "Weg1");

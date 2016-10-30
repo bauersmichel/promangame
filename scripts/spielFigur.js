@@ -7,12 +7,12 @@ var spieler_zahl = 0;
 var alle_spieler = {};
 
 GipfelSturm.SpielFigur = function SpielFigur(pos_x = 0, pos_y = 0){
-  spieler_zahl += 1;
-  this.spieler = `spieler${spieler_zahl}`;
+  this.spieler = "spieler" + ++spieler_zahl;
   this.farbe = SPIELER_FARBEN[spieler_zahl-1];
   this.pos_x = pos_x;
   this.pos_y = pos_y;
   this.wegpunkt = null;
+  this.wuerfel = null;
   this.wegpunkt_ist_gabelung = null;
 
   var c = kreisZeichnen(this.pos_x, this.pos_y, SPIELER_GROESSE, this.farbe)
@@ -29,6 +29,10 @@ GipfelSturm.SpielFigur.prototype = {
      this.wegpunkt = wegpunkt;
      this.figurPositionierenAnimiert(wegpunkt.pos_x, wegpunkt.pos_y);
    },
+   figurWuerfelZuweisen:function (wuerfel) {
+     this.wuerfel = wuerfel;
+     wuerfel.farbe = this.farbe;
+   },
    figurPositionieren:function (pos_x, pos_y) {
       console.log(`${this.spieler} => Positon ${pos_x} ${pos_y}`)
       this.pos_x = pos_x;
@@ -40,7 +44,6 @@ GipfelSturm.SpielFigur.prototype = {
       c.style.top = xy[1] + "px";
       c.style.position = "absolute";
    },
-
    figurPositionierenAnimiert:function (pos_x, pos_y, dauer=2000, setze_pos=true) {
      console.log(`${this.spieler} ===> Positon ${pos_x} ${pos_y}`)
      if (setze_pos) {
@@ -53,7 +56,6 @@ GipfelSturm.SpielFigur.prototype = {
      c.animate({"left": xy[0] + "px",
                 "top":  xy[1] + "px"}, dauer);
    },
-
    zielPositionPruefen:function (pos_x, pos_y, spieler) {
       var spieler_in_position = [];
       $.each(alle_spieler, function (key, value) {
