@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>ProManGame</title>
+    <title>ProManGame TEST_MODE</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="gipfelsturm.css" />
     <script src="scripts/jquery-3.1.1.min.js"></script>
@@ -43,8 +43,6 @@
            spieler4.figurWegpunktPositionieren(wegpunkt1);
            spieler5.figurWegpunktPositionieren(wegpunkt1);
            spieler6.figurWegpunktPositionieren(wegpunkt1);
-
-
          });
 
     </script>
@@ -53,5 +51,6 @@
     <button onClick="spieler2.figurPositionierenAnimiert(200, 100);"> Spieler2 nach WP 1   </button>
     <button onClick="spieler3.figurWegpunktPositionieren(wegpunkt2);"> Spieler3 nach WP 1 </button>
     <button onClick="spieler4.figurWegpunktPositionieren(spieler4.wegpunkt.nachfolger[0]);"> Spieler4 weiterziehen </button>
+    <button onClick="wuerfel1.wuerfeln();"> Würfeln </button>
   </body>
 </html>
