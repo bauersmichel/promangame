@@ -54,9 +54,23 @@ GipfelSturm.Wuerfel.prototype = {
                 6:[punkt_ol, punkt_ml, punkt_ul, punkt_or, punkt_mr, punkt_ur],
                 7:[punkt_m, punkt_ol, punkt_ml, punkt_ul, punkt_or, punkt_mr, punkt_ur]};
 
-      $.each(punkte[this.augenzahl], function (index, item) {
-        var punkt = Path.Circle(item);
-      });
+      if (this.augenzahl <= 6) {
+        $.each(punkte[this.augenzahl], function (index, item) {
+          var punkt = Path.Circle(item);
+        });
+      } else {
+        //basis_schrift_groesse = 40;
+        //stellen = (Math.floor(Math.log10(this.augenzahl) + 1;
+        var text = new PointText({point: [0, 0],
+                                  content: this.augenzahl,
+                                  fillColor: 'black',
+                                  fontFamily: 'Courier New',
+                                  fontWeight: 'bold',
+                                  fontSize: 40
+        });
+        text.position = new Point (25,25);
+        text.scale((WUERFEL_GROESSE-2) / text.bounds.width);
+      }
       view.draw();
     }
   },

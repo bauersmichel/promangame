@@ -25,7 +25,8 @@
            spieler5 = new GipfelSturm.SpielFigur();
            spieler6 = new GipfelSturm.SpielFigur();
 
-           wuerfel1 = new GipfelSturm.Wuerfel(6, 400, 50, "#ffffff", true);
+           wuerfel1 = new GipfelSturm.Wuerfel(6, 620, 50, "#ffffff", true);
+           wuerfel2 = new GipfelSturm.Wuerfel(1500, 730, 50, "#ff0000", true);
 
            wegpunkt1 = new GipfelSturm.WegPunktBenannt("Start", 100, 100, "Weg1");
            wegpunkt2 = new GipfelSturm.WegPunkt(200,100, "Weg1");
@@ -51,6 +52,7 @@
     <button onClick="spieler2.figurPositionierenAnimiert(200, 100);"> Spieler2 nach WP 1   </button>
     <button onClick="spieler3.figurWegpunktPositionieren(wegpunkt2);"> Spieler3 nach WP 1 </button>
     <button onClick="spieler4.figurWegpunktPositionieren(spieler4.wegpunkt.nachfolger[0]);"> Spieler4 weiterziehen </button>
-    <button onClick="wuerfel1.wuerfeln();"> Würfeln </button>
+    <button onClick="wuerfel1.wuerfeln();"> Würfel 1 würfeln </button>
+    <button onClick="wuerfel2.wuerfeln();"> Würfel 2 würfeln </button>
   </body>
 </html>
