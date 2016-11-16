@@ -1,11 +1,20 @@
-var GipfelSturm = GipfelSturm || {};
-var alle_wegpunkte = {}
+// wegPunkt.js
+// Author: M. Bauer
+//
+// Klasse zur Darstellung von Wegpunktnamen
+// ermöglicht DEBUG darstellung von Wegpunktnamen
+// ACHTUNG: Hintergrundbild (Spielplan) muss über z-Index < -2: nach ganz hinten gesetzt werden
 
-var DEBUG = true;  // Falls aktiviert werden Wegpunkte als Kreise gezeichnet, falls nicht werden nur divs erstellt
-var WEGPUNKT_GROSS = 60;
-var WEGPUNKT_KLEIN = 30;
+var GipfelSturm = GipfelSturm || {}; // Namespace-Setup
+GipfelSturm.alle_wegpunkte = {}; // Globale Variable zum speichern aller Wegpunkte
+
+var DEBUG = true;  // Falls aktiviert, werden Wegpunkte als Kreise gezeichnet, falls nicht werden nur divs erstellt
+var WEGPUNKT_GROSS = 60; // nur gerade Werte verwenden
+var WEGPUNKT_KLEIN = 30; // nur gerade Werte verwenden
 var wegpunkt_uid = 0; // globaler Zähler für Wegpunkte => eindeutige ID für die einzelnen Objekte
 
+// Wegpunkt Konstruktor
+// pos_x, pos_y: obere linke Ecke
 GipfelSturm.WegPunkt = function WegPunkt(pos_x, pos_y, weg, durchmesser=WEGPUNKT_KLEIN, farbe="#ffffff") {
   this.uid = "wegpunkt" + ++wegpunkt_uid;  // Objektzähler bei instanziierung inkrementieren
   this.name = "";
@@ -15,7 +24,9 @@ GipfelSturm.WegPunkt = function WegPunkt(pos_x, pos_y, weg, durchmesser=WEGPUNKT
   this.farbe = farbe;
   this.vorgaenger = [];
   this.nachfolger = [];
+  this.gabelung = false;
 
+  // Wegpunkt zeichnen oder "nur" DIV-Container erstellen
   if( DEBUG ) {
     offset = (SPIELER_GROESSE/2 - durchmesser/2);
     wp = kreisZeichnen(this.pos_x + offset , this.pos_y + offset, durchmesser, farbe);
@@ -25,19 +36,57 @@ GipfelSturm.WegPunkt = function WegPunkt(pos_x, pos_y, weg, durchmesser=WEGPUNKT
   }
   wp.id = this.uid;
   wp.style.zIndex=-1;
-  $(wp).on('click', function () {
-                                alert(alle_wegpunkte[this.id].uid);
-                               });
+
+  // selektor für wegpunkt (zur auswahl des nächsten WP bei Gabelung)
+  // erstellt einen roten Kreis (im DEBUG-Modus) hinter dem Wegpunkt
+  offset_selektor = (SPIELER_GROESSE/2 - durchmesser/2);
+  var selektor = kreisZeichnen(this.pos_x + offset - 5 , this.pos_y + offset - 5, durchmesser + 10, 'red');
+  selektor.id = "selektor_" + this.uid;
+  selektor.style.zIndex=-2;
+
+  //$(wp).on('click', function () {
+  //                              alert(alle_wegpunkte[this.id].uid);
+  //                             });
+
+  // Wegpunkt im Spielfeld platzieren
   $('#spielfeld').append(wp);
-  alle_wegpunkte[this.uid] = this
+  $('#spielfeld').append(selektor);
+  $('#' + selektor.id).hide();
+  GipfelSturm.alle_wegpunkte[this.uid] = this;
 
 }
 
+// Wegpunkt Methoden
 GipfelSturm.WegPunkt.prototype = {
   addNachfolger:function (wegpunkt) {
     this.nachfolger.push(wegpunkt);
     wegpunkt.vorgaenger.push(this);
+    if (this.nachfolger.length > 1)
+        this.gabelung = true;
   },
+  // Wegpunkt auswählbar machen
+  // Zeigt einen roten kreis bei MouseOver
+  auswahlAktivieren:function () {
+    var uid = this.uid;
+    $('#' + uid).on('mouseenter', function() {
+      $('#selektor_' + uid).show();
+    });
+    $('#' + uid).on('mouseleave', function() {
+      $('#selektor_' + uid).hide();
+    });
+    $('#' + uid).on('click', function() {  // Klicken setzt .naechster_wegpunkt des aktiven Spielers auf diesen WP
+      GipfelSturm.alle_spieler['spieler' + GipfelSturm.aktiver_spieler].naechster_wegpunkt = GipfelSturm.alle_wegpunkte[uid];
+      meldung.gruen(uid + " gewählt! Bitte würfeln!");
+    });
+
+  },
+  auswahlDeaktivieren:function () {
+    $('#' + this.uid).off('mouseenter');
+    $('#' + this.uid).off('mouseleave');
+    $('#' + this.uid).off('click');
+    $('#selektor_' + this.uid).hide();
+  }
+
 }
 
 GipfelSturm.WegPunktBenannt = function WegPunktBenannt(name, pos_x, pos_y, weg) {

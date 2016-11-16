@@ -1,0 +1,28 @@
+
+#meldung{
+  position: fixed;
+  z-index: 999;
+  top: 12px;
+  right: 12px;
+}
+.meldung{
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  width: 300px;
+  border-radius: 3px;
+  color: white;
+  right: -400px;
+}
+.schwarz{
+  background: #3c3b3b;
+}
+.gruen{
+  background: #44be75;
+}
+.rot{
+  background: #c33c3c;
+}

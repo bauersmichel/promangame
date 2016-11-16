@@ -1,6 +1,6 @@
 var GipfelSturm = GipfelSturm || {};
 var WUERFEL_GROESSE = 50;
-var alle_wuerfel = {};
+GipfelSturm.alle_wuerfel = {};
 var wuerfel_uid = 0;
 
 GipfelSturm.Wuerfel = function Wuerfel(seiten=6, pos_x=0, pos_y=0, farbe="#ffffff", zeichnen=false){
@@ -10,16 +10,36 @@ GipfelSturm.Wuerfel = function Wuerfel(seiten=6, pos_x=0, pos_y=0, farbe="#fffff
   this.pos_x = pos_x;
   this.pos_y = pos_y;
   this.augenzahl = 1;
+  this.spieler = null;
   if(zeichnen == true) {
     this.wuerfelZeichnen();
   }
-  alle_wuerfel[this.uid] = this;
+  GipfelSturm.alle_wuerfel[this.uid] = this;
 }
 
 GipfelSturm.Wuerfel.prototype = {
+  spielerZuweisen:function ( spieler ) {
+    this.spieler = spieler;
+  },
   wuerfeln:function () {
     this.augenzahl = Math.floor((Math.random() * this.seiten) + 1);
+    console.log(this.uid + ' ' + this.augenzahl);
     this.wuerfelZeichnen();
+    return this.augenzahl;
+  },
+  wuerfelnMitZiehen:function () {
+      with (this.spieler) {
+        w = this.wuerfeln()
+        for (i=0; i < w; ++i) {
+          if (naechster_wegpunkt) {
+            figurWegpunktPositionieren(naechster_wegpunkt);
+            naechster_wegpunkt = null;
+          } else {
+            figurWegpunktPositionieren(wegpunkt.nachfolger[0]);
+          }
+          if (wegpunkt.gabelung == true) break;
+        }
+      }
   },
   wuerfelZeichnen: function(pos_x=null, pos_y=null) {
     var wuerfel = $('#' + this.uid)[0]; // pruefen ob wuerfel bereits im DOM exisiert
@@ -33,6 +53,7 @@ GipfelSturm.Wuerfel.prototype = {
       wuerfel.id = this.uid;
       $("#spielfeld").append(wuerfel);
     }
+    wuerfel.getContext('2d').clearRect(0, 0, WUERFEL_GROESSE, WUERFEL_GROESSE);
     paper.setup(wuerfel);
       with (paper) {
       var re = new Rectangle([0, 0], [WUERFEL_GROESSE, WUERFEL_GROESSE]);
@@ -73,5 +94,13 @@ GipfelSturm.Wuerfel.prototype = {
       }
       view.draw();
     }
+  },
+
+  wuerfelAktivieren: function() {
+    $('#' + this.uid)[0].show();
+  },
+
+  wuerfelDeaktivieren: function() {
+    $('#' + this.uid)[0].hide();
   },
 }
