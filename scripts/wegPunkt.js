@@ -8,7 +8,7 @@
 var GipfelSturm = GipfelSturm || {}; // Namespace-Setup
 GipfelSturm.alle_wegpunkte = {}; // Globale Variable zum speichern aller Wegpunkte
 
-var DEBUG = true;  // Falls aktiviert, werden Wegpunkte als Kreise gezeichnet, falls nicht werden nur divs erstellt
+var DEBUG = false;  // Falls aktiviert, werden Wegpunkte als Kreise gezeichnet, falls nicht werden nur divs erstellt
 var WEGPUNKT_GROSS = 60; // nur gerade Werte verwenden
 var WEGPUNKT_KLEIN = 30; // nur gerade Werte verwenden
 var wegpunkt_uid = 0; // globaler Zähler für Wegpunkte => eindeutige ID für die einzelnen Objekte

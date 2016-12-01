@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ProManGame TEST_MODE</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="gipfelsturm.css" />
+	<link rel="stylesheet" type="text/css" href="css/meldung.css" />
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="scripts/paper-core.min.js"></script>
+    <script src="scripts/gipfelsturmLib.js"></script>
+    <script src="scripts/spielFigur.js"></script>
+    <script src="scripts/wegPunkt.js"></script>
+    <script src="scripts/wuerfel.js"></script>
+    <script src="scripts/kontrolle.js"></script>
+  </head>
+   <!--<body style="background-color:#333333;";>   -->
+   <body style= background-image:url(res/gipfeleroberer_spielplan_Jungle.jpg);background-repeat:no-repeat;> 
+	<!-- Das Bild hat eine Auflösung von 1049 * 741 px , Die Wegpunkte sind auf das Bild angepasst-->
+    <div id="meldung"></div>
+    <div id="spielfeld">
+		
+    </div>
+    <script>
+         var GipfelSturm = GipfelSturm || {};
+
+         $(document).ready( function (){
+		   //Weg 1
+           wegpunkt1 = new GipfelSturm.WegPunktBenannt("Start", 148, 394, "Weg1");
+           wegpunkt2 = new GipfelSturm.WegPunkt(128,320, "Weg1");
+		   wegpunkt3 = new GipfelSturm.WegPunkt(167,280, "Weg1");
+           wegpunkt4 = new GipfelSturm.WegPunkt(170,220, "Weg1");
+           wegpunkt5 = new GipfelSturm.WegPunktBenannt("Bergwiese zur Sennerin", 192, 180, "Weg1");
+		   wegpunkt6 = new GipfelSturm.WegPunkt(248,168, "Weg1");
+		   wegpunkt7 = new GipfelSturm.WegPunkt(275,210, "Weg1");
+		   wegpunkt8 = new GipfelSturm.WegPunkt(287,253, "Weg1");
+           wegpunkt9 = new GipfelSturm.WegPunkt(335,277, "Weg1");
+		   wegpunkt10 = new GipfelSturm.WegPunktBenannt("Gipfel Kleiner Alpstein",365,335, "Weg1");
+		   wegpunkt11 = new GipfelSturm.WegPunkt(435,383, "Weg1");
+		   wegpunkt12 = new GipfelSturm.WegPunkt(440,420, "Weg1");
+           wegpunkt13 = new GipfelSturm.WegPunkt(432,457, "Weg1");
+		   wegpunkt14 = new GipfelSturm.WegPunkt(457,503, "Weg1");
+		   wegpunkt15 = new GipfelSturm.WegPunkt(492,542, "Weg1");
+		   wegpunkt16 = new GipfelSturm.WegPunkt(528,586, "Weg1");
+           wegpunkt17 = new GipfelSturm.WegPunkt(567,623, "Weg1");
+		   wegpunkt18 = new GipfelSturm.WegPunktBenannt("Gipfel Hoher Alpstein", 618, 665, "Weg1");
+		   wegpunkt19 = new GipfelSturm.WegPunkt(505,662, "Weg1");
+		   wegpunkt20 = new GipfelSturm.WegPunkt(422,672, "Weg1");
+		   wegpunkt21 = new GipfelSturm.WegPunktBenannt("Wildbach Alpsteinache",335,670, "Weg1");
+           wegpunkt22 = new GipfelSturm.WegPunkt(255,650, "Weg1");
+		   wegpunkt23 = new GipfelSturm.WegPunkt(192,640, "Weg1");
+		   wegpunkt24 = new GipfelSturm.WegPunkt(113,646, "Weg1");
+		   wegpunkt25 = new GipfelSturm.WegPunktBenannt("Kapelle zur letzten Andacht",113,570, "Weg1");
+           wegpunkt26 = new GipfelSturm.WegPunkt(115,490, "Weg1");
+		   wegpunkt27 = new GipfelSturm.WegPunkt(152,450, "Weg1");
+		   
+		   //Weg 2
+		   wegpunkt28 = new GipfelSturm.WegPunkt(205,125, "Weg2");
+		   wegpunkt29 = new GipfelSturm.WegPunkt(235,82, "Weg2");
+		   wegpunkt30 = new GipfelSturm.WegPunkt(299,55, "Weg2");
+		   wegpunkt31 = new GipfelSturm.WegPunktBenannt("Weggabelung Wasserfallsteig",349,59, "Weg2");
+		   wegpunkt32 = new GipfelSturm.WegPunkt(382,138, "Weg2");
+		   wegpunkt33 = new GipfelSturm.WegPunkt(437,175, "Weg2");
+		   wegpunkt34 = new GipfelSturm.WegPunkt(515,189, "Weg2");
+		   wegpunkt35 = new GipfelSturm.WegPunktBenannt("Einstieg zum Wasserfallsteig",602,223, "Weg2");
+		   wegpunkt36 = new GipfelSturm.WegPunkt(605,295, "Weg2");
+		   wegpunkt37 = new GipfelSturm.WegPunkt(589,355, "Weg2");
+		   wegpunkt38 = new GipfelSturm.WegPunkt(632,405, "Weg2");
+		   wegpunkt39 = new GipfelSturm.WegPunktBenannt("Ausstieg",650,455, "Weg2");
+		   wegpunkt40 = new GipfelSturm.WegPunkt(640,498, "Weg2");
+		   wegpunkt41 = new GipfelSturm.WegPunkt(650,556, "Weg2");
+		   wegpunkt42 = new GipfelSturm.WegPunkt(651,611, "Weg2");
+		   
+		   //Weg 3
+		   wegpunkt43 = new GipfelSturm.WegPunkt(418,62, "Weg3");
+		   wegpunkt44 = new GipfelSturm.WegPunkt(480,57, "Weg3");
+		   wegpunkt45 = new GipfelSturm.WegPunkt(537,50, "Weg3");
+		   wegpunkt46 = new GipfelSturm.WegPunktBenannt("Alpsteinachen Quelle",612,90, "Weg3");
+		   wegpunkt47 = new GipfelSturm.WegPunktBenannt("Gabelung", 683,65, "Weg3");
+		   wegpunkt48 = new GipfelSturm.WegPunkt(767,65, "Weg3");
+		   wegpunkt49 = new GipfelSturm.WegPunkt(848,49, "Weg3");
+		   wegpunkt50 = new GipfelSturm.WegPunktBenannt("Fernblick zum grossen Weisser",927,56, "Weg3");
+		   wegpunkt51 = new GipfelSturm.WegPunkt(951,105, "Weg3");
+		   wegpunkt52 = new GipfelSturm.WegPunkt(908,150, "Weg3");
+		   wegpunkt53 = new GipfelSturm.WegPunktBenannt("Alpstein Alm",907,220, "Weg3");
+		   wegpunkt54 = new GipfelSturm.WegPunkt(890,290, "Weg3");
+		   wegpunkt55 = new GipfelSturm.WegPunkt(862,352, "Weg3");
+		   wegpunkt56 = new GipfelSturm.WegPunkt(890,430, "Weg3");
+		   wegpunkt57 = new GipfelSturm.WegPunktBenannt("Alpsteinhuette",852,512, "Weg3");
+		   wegpunkt58 = new GipfelSturm.WegPunkt(833,605, "Weg3");
+		   wegpunkt59 = new GipfelSturm.WegPunkt(776,604, "Weg3");
+		   wegpunkt60 = new GipfelSturm.WegPunkt(754,685, "Weg3");
+		   wegpunkt61 = new GipfelSturm.WegPunkt(687,691, "Weg3");
+		   
+		   //Weg 4
+		   wegpunkt62 = new GipfelSturm.WegPunkt(718,138, "Weg4");
+		   wegpunkt63 = new GipfelSturm.WegPunkt(767,189, "Weg4");
+		   wegpunkt64 = new GipfelSturm.WegPunkt(829,206, "Weg4");
+		   
+		   //Weg 5
+		   wegpunkt65 = new GipfelSturm.WegPunkt(654,202, "Weg5");
+		   wegpunkt66 = new GipfelSturm.WegPunkt(705,220, "Weg5");
+		   wegpunkt67 = new GipfelSturm.WegPunkt(741,244, "Weg5");
+		   wegpunkt68 = new GipfelSturm.WegPunkt(787,259, "Weg5");
+		   wegpunkt69 = new GipfelSturm.WegPunkt(845,251, "Weg5");
+		   
+		   //Weg 6
+		   wegpunkt70 = new GipfelSturm.WegPunkt(726,436, "Weg6");
+		   wegpunkt71 = new GipfelSturm.WegPunkt(782,470, "Weg6");
+		   
+		   
+           //Weg 1
+           wegpunkt1.addNachfolger(wegpunkt2);
+           wegpunkt2.addNachfolger(wegpunkt3);
+           wegpunkt3.addNachfolger(wegpunkt4);
+           wegpunkt4.addNachfolger(wegpunkt5);
+		   //Gabelung
+           wegpunkt5.addNachfolger(wegpunkt6);
+		   wegpunkt5.addNachfolger(wegpunkt28);
+		   //Weg 1
+           wegpunkt6.addNachfolger(wegpunkt7);
+           wegpunkt7.addNachfolger(wegpunkt8);
+           wegpunkt8.addNachfolger(wegpunkt9);
+		   wegpunkt9.addNachfolger(wegpunkt10);
+           wegpunkt10.addNachfolger(wegpunkt11);
+           wegpunkt11.addNachfolger(wegpunkt12);
+           wegpunkt12.addNachfolger(wegpunkt13);
+           wegpunkt13.addNachfolger(wegpunkt14);
+           wegpunkt14.addNachfolger(wegpunkt15);
+           wegpunkt15.addNachfolger(wegpunkt16);
+           wegpunkt16.addNachfolger(wegpunkt17);
+		   wegpunkt17.addNachfolger(wegpunkt18);
+		   //Zusammenführung Weg 1 "Gipfel hoher Alpstein" bis zum Start
+           wegpunkt18.addNachfolger(wegpunkt19);
+           wegpunkt19.addNachfolger(wegpunkt20);
+           wegpunkt20.addNachfolger(wegpunkt21);
+		   wegpunkt21.addNachfolger(wegpunkt22);
+           wegpunkt22.addNachfolger(wegpunkt23);
+		   wegpunkt23.addNachfolger(wegpunkt24);
+           wegpunkt24.addNachfolger(wegpunkt25);
+           wegpunkt25.addNachfolger(wegpunkt26);
+           wegpunkt26.addNachfolger(wegpunkt27);
+           wegpunkt27.addNachfolger(wegpunkt1);
+		   
+		   //Weg 2
+		   wegpunkt28.addNachfolger(wegpunkt29);
+           wegpunkt29.addNachfolger(wegpunkt30);
+           wegpunkt30.addNachfolger(wegpunkt31);
+           wegpunkt31.addNachfolger(wegpunkt32);
+           wegpunkt32.addNachfolger(wegpunkt33);
+           wegpunkt33.addNachfolger(wegpunkt34);
+           wegpunkt34.addNachfolger(wegpunkt35);
+           wegpunkt35.addNachfolger(wegpunkt36);
+		   wegpunkt36.addNachfolger(wegpunkt37);
+           wegpunkt37.addNachfolger(wegpunkt38);
+           wegpunkt38.addNachfolger(wegpunkt39);
+           wegpunkt39.addNachfolger(wegpunkt40);
+           wegpunkt40.addNachfolger(wegpunkt41);
+           wegpunkt41.addNachfolger(wegpunkt42);
+           wegpunkt42.addNachfolger(wegpunkt18);
+		   //Zusammenführung Weg 2 und Weg 1 bei Wegpunkt 18
+		   
+		   //Weg 3: Gabelung bei WegPunkt 31
+		   wegpunkt31.addNachfolger(wegpunkt43);
+		   wegpunkt43.addNachfolger(wegpunkt44);
+           wegpunkt44.addNachfolger(wegpunkt45);
+           wegpunkt45.addNachfolger(wegpunkt46);
+           wegpunkt46.addNachfolger(wegpunkt47);
+           wegpunkt47.addNachfolger(wegpunkt48);
+           wegpunkt48.addNachfolger(wegpunkt49);
+           wegpunkt49.addNachfolger(wegpunkt50);
+           wegpunkt50.addNachfolger(wegpunkt51);
+		   wegpunkt51.addNachfolger(wegpunkt52);
+           wegpunkt52.addNachfolger(wegpunkt53);
+           wegpunkt53.addNachfolger(wegpunkt54);
+           wegpunkt54.addNachfolger(wegpunkt55);
+           wegpunkt55.addNachfolger(wegpunkt56);
+           wegpunkt56.addNachfolger(wegpunkt57);
+           wegpunkt57.addNachfolger(wegpunkt58);
+		   wegpunkt58.addNachfolger(wegpunkt59);
+           wegpunkt59.addNachfolger(wegpunkt60);
+           wegpunkt60.addNachfolger(wegpunkt61);
+           wegpunkt61.addNachfolger(wegpunkt18);
+		   //Zusammenführung bei WegPunkt 18
+		   
+		   //Weg 4: Gabelung bei WegPunkt 47
+		   wegpunkt47.addNachfolger(wegpunkt62);
+		   wegpunkt62.addNachfolger(wegpunkt63);
+		   wegpunkt63.addNachfolger(wegpunkt64);
+		   wegpunkt64.addNachfolger(wegpunkt53);
+		   //Zusammenführung bei WegPunkt 53
+		   
+		   //Weg 5: Gabelung bei WegPunkt 35
+		   wegpunkt35.addNachfolger(wegpunkt65);
+		   wegpunkt65.addNachfolger(wegpunkt66);
+		   wegpunkt66.addNachfolger(wegpunkt67);
+		   wegpunkt67.addNachfolger(wegpunkt68);
+		   wegpunkt68.addNachfolger(wegpunkt69);
+		   wegpunkt69.addNachfolger(wegpunkt53);
+		   //Zusammenführung bei WegPunkt 53
+		   
+		   //Weg 6: Gabelung bei WegPunkt 39
+		   wegpunkt39.addNachfolger(wegpunkt70);
+		   wegpunkt70.addNachfolger(wegpunkt71);
+		   wegpunkt71.addNachfolger(wegpunkt57);
+		   //Zusammenführung bei WegPunkt 57
+		   
+           kontrolle = new GipfelSturm.Kontrolle(4, wegpunkt1);
+
+           kontrolle.naechsterSpieler();
+         });
+
+    </script>
+
+    <button onClick="kontrolle.wuerfeln();"> WÜRFELN </button>
+
+	
+  </body>
+</html>
