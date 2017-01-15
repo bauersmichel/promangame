@@ -54,5 +54,36 @@ GipfelSturm.Kontrolle = function Krontrolle(spielerzahl, start_wegpunkt){
        }
        wuerfel.wuerfelnMitZiehen();
        this.naechsterSpieler();
+     },
+     // aktuellen Spielzustand in localStorage speichern
+     speichern:function() {
+       var alle_spieler = {}
+       for(s in GipfelSturm.alle_spieler) {
+         if (typeof GipfelSturm.alle_spieler[s] !== 'function') {
+            spieler = GipfelSturm.alle_spieler[s];
+            alle_spieler[spieler.spieler] = spieler.wegpunkt.uid;
+         }
+       }
+       localStorage.alle_spieler = JSON.stringify(alle_spieler);
+       localStorage.aktiver_spieler = GipfelSturm.aktiver_spieler;
+       localStorage.spielzug = this.spielzug;
+     },
+     // aktuellen Spielzustand aus localStorage laden
+     laden:function() {
+       try {
+         if (localStorage.alle_spieler != null) {
+           var alle_spieler = JSON.parse(localStorage.alle_spieler);
+           $.each(alle_spieler, function (key, value) {
+               GipfelSturm.alle_spieler[key].figurWegpunktPositionieren(GipfelSturm.alle_wegpunkte[value]);
+           });
+           GipfelSturm.aktiver_spieler = localStorage.aktiver_spieler;
+           this.spielzug = localStorage.spielzug;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+     },
+     spielstandLoeschen:function() {
+       localStorage.clear();
      }
   }
