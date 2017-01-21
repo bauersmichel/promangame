@@ -1,5 +1,5 @@
 // gipfelsturmLib.js
-// Author: M. Bauer
+// Authoren: M. Bauer, H. Eder, B. Fugger, W. Horn, S. Richter
 //
 // Library Funktionen zur Nutzung im GipfelSturm Projekt
 

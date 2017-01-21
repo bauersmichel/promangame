@@ -1,5 +1,5 @@
 // kontrolle.js
-// Author: M. Bauer
+// Authoren: M. Bauer, H. Eder, B. Fugger, W. Horn, S. Richter
 //
 // Klasse zur Steuerung des GipfelSturm-Spiels
 //

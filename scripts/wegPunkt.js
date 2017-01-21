@@ -1,5 +1,5 @@
 // wegPunkt.js
-// Author: M. Bauer
+// Authoren: M. Bauer, H. Eder, B. Fugger, W. Horn, S. Richter
 //
 // Klasse zur Darstellung von Wegpunktnamen
 // ermöglicht DEBUG darstellung von Wegpunktnamen

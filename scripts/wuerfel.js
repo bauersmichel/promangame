@@ -1,8 +1,16 @@
-var GipfelSturm = GipfelSturm || {};
-var WUERFEL_GROESSE = 50;
-GipfelSturm.alle_wuerfel = {};
+// wuerfel.js
+// Author: M. Bauer, H. Eder, B. Fugger, W. Horn, S. Richter
+//
+// Klasse für Würfeldarstellung und Würfelfunktionen
+var GipfelSturm = GipfelSturm || {}; // Namespace-Setup
+var WUERFEL_GROESSE = 50;  // Würfel-Seitenlängee in px
+GipfelSturm.alle_wuerfel = {}; // globale Variable zum abspeichern aller Würfel-Objekte
 var wuerfel_uid = 0;
 
+// Würfel-Klasse
+// seiten: Seitenzahl 1-n (bei sehr großen werten kann die Darstellung der Zahl zu klein werden)
+// pos_x, pos_y: Position des Würfels (px)
+// zeichnen: legt fest, ob der Würfel beim instanziieren gezeichnet werden soll
 GipfelSturm.Wuerfel = function Wuerfel(seiten=6, pos_x=0, pos_y=0, farbe="#ffffff", zeichnen=false){
   this.uid = "wuerfel" + ++wuerfel_uid;
   this.farbe = farbe;
@@ -18,9 +26,11 @@ GipfelSturm.Wuerfel = function Wuerfel(seiten=6, pos_x=0, pos_y=0, farbe="#fffff
 }
 
 GipfelSturm.Wuerfel.prototype = {
+  // Würfel einem Spieler zuweisen
   spielerZuweisen:function ( spieler ) {
     this.spieler = spieler;
   },
+  // Zufälliges Würfelergebnis erzeugen und Würfel zeichnen
   wuerfeln:function () {
     this.augenzahl = Math.floor((Math.random() * this.seiten) + 1);
     console.log(this.uid + ' ' + this.augenzahl);
@@ -41,6 +51,9 @@ GipfelSturm.Wuerfel.prototype = {
         }
       }
   },
+  // Funktion zum Zeichnen des Würfels
+  // Augenzahl 1-6 wird als Punkte dargestellt
+  // Augenzahl 7-n wird als Dezimalzahl dargestellt (Grösse wird automatisch skaliert)
   wuerfelZeichnen: function(pos_x=null, pos_y=null) {
     var wuerfel = $('#' + this.uid)[0]; // pruefen ob wuerfel bereits im DOM exisiert
     if (!wuerfel) { // noch nicht im  DOM => canvasErstellen
@@ -60,6 +73,7 @@ GipfelSturm.Wuerfel.prototype = {
       var rect = Path.Rectangle(re, 5);
       rect.fillColor = this.farbe;
 
+      // Punkt-Positionen in Abbhängigkeit von Wüfelgröße berechen
       var punkt_m ={center: [WUERFEL_GROESSE/2, WUERFEL_GROESSE/2], radius: 5, fillColor: 'black'};
       var punkt_ol ={center: [WUERFEL_GROESSE/6, WUERFEL_GROESSE/6], radius: 5, fillColor: 'black'};
       var punkt_ml ={center: [WUERFEL_GROESSE/6, WUERFEL_GROESSE/6 * 3], radius: 5, fillColor: 'black'};
@@ -67,6 +81,7 @@ GipfelSturm.Wuerfel.prototype = {
       var punkt_or ={center: [WUERFEL_GROESSE/6 * 5 , WUERFEL_GROESSE/6], radius: 5, fillColor: 'black'};
       var punkt_mr ={center: [WUERFEL_GROESSE/6 * 5 , WUERFEL_GROESSE/6 * 3], radius: 5, fillColor: 'black'};
       var punkt_ur ={center: [WUERFEL_GROESSE/6 * 5 , WUERFEL_GROESSE/6 * 5], radius: 5, fillColor: 'black'};
+      // Zuordnung Ziffer <=> Punkte
       punkte = {1:[punkt_m],
                 2:[punkt_ol,punkt_ur],
                 3:[punkt_m, punkt_ol, punkt_ur],
@@ -75,13 +90,11 @@ GipfelSturm.Wuerfel.prototype = {
                 6:[punkt_ol, punkt_ml, punkt_ul, punkt_or, punkt_mr, punkt_ur],
                 7:[punkt_m, punkt_ol, punkt_ml, punkt_ul, punkt_or, punkt_mr, punkt_ur]};
 
-      if (this.augenzahl <= 6) {
+      if (this.augenzahl <= 6) { // Punkte zeichnen
         $.each(punkte[this.augenzahl], function (index, item) {
           var punkt = Path.Circle(item);
         });
-      } else {
-        //basis_schrift_groesse = 40;
-        //stellen = (Math.floor(Math.log10(this.augenzahl) + 1;
+      } else { // Zahl zeichnen
         var text = new PointText({point: [0, 0],
                                   content: this.augenzahl,
                                   fillColor: 'black',
@@ -90,6 +103,7 @@ GipfelSturm.Wuerfel.prototype = {
                                   fontSize: 40
         });
         text.position = new Point (25,25);
+        // Textgröße auf Würfel skalieren
         text.scale((WUERFEL_GROESSE-2) / text.bounds.width);
       }
       view.draw();

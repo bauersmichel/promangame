@@ -1,5 +1,5 @@
 // spielFigur.js
-// Author: M. Bauer
+// Authoren: M. Bauer, H. Eder, B. Fugger, W. Horn, S. Richter
 //
 // Klasse zur Darstellung von Spielfiguren
 
