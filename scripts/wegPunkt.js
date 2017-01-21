@@ -2,13 +2,13 @@
 // Authoren: M. Bauer, H. Eder, B. Fugger, W. Horn, S. Richter
 //
 // Klasse zur Darstellung von Wegpunktnamen
-// ermöglicht DEBUG darstellung von Wegpunktnamen
+// ermöglicht DEBUG darstellung von Wegpunktnamen => Hierfür GipfelSturm.DEBUG = true im Main-Module setzen
 // ACHTUNG: Hintergrundbild (Spielplan) muss über z-Index < -2: nach ganz hinten gesetzt werden
 
 var GipfelSturm = GipfelSturm || {}; // Namespace-Setup
 GipfelSturm.alle_wegpunkte = {}; // Globale Variable zum speichern aller Wegpunkte
 
-var DEBUG = false;  // Falls aktiviert, werden Wegpunkte als Kreise gezeichnet, falls nicht werden nur divs erstellt
+//var GipfelSturm.DEBUG = false;  // muss bei Bedarf im Main-Module gesetzt werden
 var WEGPUNKT_GROSS = 60; // nur gerade Werte verwenden
 var WEGPUNKT_KLEIN = 30; // nur gerade Werte verwenden
 var wegpunkt_uid = 0; // globaler Zähler für Wegpunkte => eindeutige ID für die einzelnen Objekte
@@ -27,7 +27,7 @@ GipfelSturm.WegPunkt = function WegPunkt(pos_x, pos_y, weg, durchmesser=WEGPUNKT
   this.gabelung = false;
 
   // Wegpunkt zeichnen oder "nur" DIV-Container erstellen
-  if( DEBUG ) {
+  if( GipfelSturm.DEBUG ) {
     offset = (SPIELER_GROESSE/2 - durchmesser/2);
     wp = kreisZeichnen(this.pos_x + offset , this.pos_y + offset, durchmesser, farbe);
   } else {
